@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "precommit": "npm test",
     "test": "jest --passWithNoTests",
     "test:staged": "jest --passWithNoTests"
   },
