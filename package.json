@@ -15,6 +15,20 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.ts": [
+        "eslint 'src/**' --fix",
+        "npm run test:staged",
+        "git add"
+      ]
+    }
+  },
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.2",
