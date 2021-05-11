@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests",
-    "test:staged": "jest --passWithNoTests",
-    "precommit": "lint-staged"
+    "test:staged": "jest --passWithNoTests"
   },
   "engines": {
     "node": "14.0.0",
@@ -17,7 +16,7 @@
   "license": "ISC",
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
