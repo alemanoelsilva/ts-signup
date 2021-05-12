@@ -4,12 +4,10 @@ import { httpResponse, httpRequest } from '../protocols/http'
 
 export class SignUpController {
   handle (httpRequest: httpRequest): httpResponse {
-    if (!httpRequest.body.name) {
-      return badRequest(new MissingParamError('name'))
-    }
+    const fieldNotFound = ['name', 'email'].find(field => !httpRequest.body[field])
 
-    if (!httpRequest.body.email) {
-      return badRequest(new MissingParamError('email'))
+    if (fieldNotFound) {
+      return badRequest(new MissingParamError(fieldNotFound))
     }
 
     return {
