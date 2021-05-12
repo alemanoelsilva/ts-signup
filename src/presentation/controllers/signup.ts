@@ -1,8 +1,9 @@
 import { MissingParamError } from '../errors/missing-param-error'
 import { badRequest } from '../helpers/http-helpers'
+import { Controller } from '../protocols/controllers'
 import { httpResponse, httpRequest } from '../protocols/http'
 
-export class SignUpController {
+export class SignUpController implements Controller {
   handle (httpRequest: httpRequest): httpResponse {
     const fieldNotFound = ['name', 'email', 'password', 'passwordConfirmation']
       .find(field => !httpRequest.body[field])
