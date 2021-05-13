@@ -1,7 +1,6 @@
-import { AddAccount } from '../../domain/usecases/add-account'
-import { MissingParamError, InvalidParamError } from '../errors'
-import { badRequest, serverError } from '../helpers/http-helpers'
-import { Controller, httpResponse, httpRequest, EmailValidator } from '../protocols'
+import { Controller, HttpResponse, HttpRequest, EmailValidator, AddAccount } from './signup-protocols'
+import { MissingParamError, InvalidParamError } from '../../errors'
+import { badRequest, serverError } from '../../helpers/http-helpers'
 
 export class SignUpController implements Controller {
   private readonly emailValidator: EmailValidator
@@ -12,7 +11,7 @@ export class SignUpController implements Controller {
     this.addAccount = addAccount
   }
 
-  handle (httpRequest: httpRequest): httpResponse {
+  handle (httpRequest: HttpRequest): HttpResponse {
     try {
       const fieldNotFound = ['name', 'email', 'password', 'passwordConfirmation']
         .find(field => !httpRequest.body[field])
