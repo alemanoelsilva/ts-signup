@@ -7,7 +7,10 @@ describe('SignUp Routes', () => {
 
   afterAll(async () => MongoHelper.disconnect())
 
-  afterEach(async () => MongoHelper.getCollection('accounts').deleteMany({}))
+  beforeEach(async () => {
+    const collection = await MongoHelper.getCollection('accounts')
+    await collection.deleteMany({})
+  })
 
   test('Should return an account on success', async () => {
     await request(app)
