@@ -46,4 +46,24 @@ describe('Log Controller Decorator', () => {
     await sut.handle(httpRequest)
     expect(handlySpy).toBeCalledWith(httpRequest)
   })
+
+  test('Should return the same result of the controller', async () => {
+    const { sut, controllerStub } = makeSut()
+    jest.spyOn(controllerStub, 'handle')
+
+    const httpRequest = {
+      body: 'any_body',
+      name: 'any_name',
+      password: 'any_password',
+      passwordConfirmation: 'any_password'
+    }
+
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual({
+      statusCode: 200,
+      body: {
+        name: 'Ale'
+      }
+    })
+  })
 })
