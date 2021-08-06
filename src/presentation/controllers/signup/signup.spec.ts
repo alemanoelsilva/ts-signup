@@ -5,7 +5,8 @@ import {
   AccountModel,
   AddAccount,
   AddAccountModel,
-  Validation
+  Validation,
+  VALIDATION_TYPE
 } from './signup-protocols'
 import { HttpRequest } from '../../protocols'
 import { ok, badRequest, serverError } from '../../helpers/http-helpers'
@@ -28,7 +29,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
-    validate(input: any): Error | null {
+    validate(input: any): VALIDATION_TYPE {
       return null
     }
   }
