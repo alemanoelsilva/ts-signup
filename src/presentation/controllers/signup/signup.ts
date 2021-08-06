@@ -6,7 +6,7 @@ import {
   AddAccount,
   Validation
 } from './signup-protocols'
-import { MissingParamError, InvalidParamError } from '../../errors'
+import { InvalidParamError } from '../../errors'
 import { badRequest, serverError, ok } from '../../helpers/http-helpers'
 
 export class SignUpController implements Controller {
@@ -21,17 +21,6 @@ export class SignUpController implements Controller {
       const error = this.validation.validate(httpRequest.body)
       if (error) {
         return badRequest(error)
-      }
-
-      const fieldNotFound = [
-        'name',
-        'email',
-        'password',
-        'passwordConfirmation'
-      ].find((field) => !httpRequest.body[field])
-
-      if (fieldNotFound) {
-        return badRequest(new MissingParamError(fieldNotFound))
       }
 
       const { name, email, password, passwordConfirmation } = httpRequest.body
