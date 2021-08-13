@@ -1,7 +1,11 @@
 import { LogErrorRepository } from '../../data/protocols/log-error-repository'
 import { AccountModel } from '../../domain/models/account'
-import { serverError, ok } from '../../presentation/helpers/http-helpers'
-import { Controller, HttpRequest, HttpResponse } from '../../presentation/protocols'
+import { serverError, ok } from '../../presentation/helpers/http/http-helpers'
+import {
+  Controller,
+  HttpRequest,
+  HttpResponse
+} from '../../presentation/protocols'
 import { LogControllerDecorator } from './log'
 
 interface SutTypes {
@@ -35,8 +39,8 @@ const makeFakeServerError = (): HttpResponse => {
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      return new Promise(resolve => resolve(ok(makeFakeAccount())))
+    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+      return new Promise((resolve) => resolve(ok(makeFakeAccount())))
     }
   }
 
@@ -45,8 +49,8 @@ const makeController = (): Controller => {
 
 const makeLogErrorRepository = (): LogErrorRepository => {
   class LogErrorRepositoryStub implements LogErrorRepository {
-    async logError (stack: string): Promise<void> {
-      return new Promise(resolve => resolve())
+    async logError(stack: string): Promise<void> {
+      return new Promise((resolve) => resolve())
     }
   }
 
@@ -86,7 +90,9 @@ describe('Log Controller Decorator', () => {
   test('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
     const { sut, controllerStub, logErrorRepository } = makeSut()
 
-    jest.spyOn(controllerStub, 'handle').mockResolvedValueOnce(makeFakeServerError())
+    jest
+      .spyOn(controllerStub, 'handle')
+      .mockResolvedValueOnce(makeFakeServerError())
     const logSpy = jest.spyOn(logErrorRepository, 'logError')
 
     await sut.handle(makeFakeRequest())
