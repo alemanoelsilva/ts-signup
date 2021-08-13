@@ -2,8 +2,8 @@ import bcrypt from 'bcrypt'
 import { BcryptAdapter } from './bcrypt-adapter'
 
 jest.mock('bcrypt', () => ({
-  async hash (): Promise<string> {
-    return new Promise(resolve => resolve('hash'))
+  async hash(): Promise<string> {
+    return new Promise((resolve) => resolve('hash'))
   }
 }))
 

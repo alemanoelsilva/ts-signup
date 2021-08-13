@@ -29,9 +29,7 @@ describe('SignUpValidation Factory', () => {
       validtions.push(new RequiredFieldValidation(field))
     }
 
-    validtions.push(
-      new CompareFieldsValidation('password', 'passwordConfirmation')
-    )
+    validtions.push(new CompareFieldsValidation('password', 'passwordConfirmation'))
 
     validtions.push(new EmailValidation('email', makeEmailValidator()))
 
