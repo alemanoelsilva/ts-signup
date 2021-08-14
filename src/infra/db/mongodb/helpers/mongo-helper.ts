@@ -25,6 +25,7 @@ export const MongoHelper = {
   },
 
   map(collection: any): any {
+    if (!collection) return null
     const { _id, ...collectionWithOutId } = collection
 
     return {
