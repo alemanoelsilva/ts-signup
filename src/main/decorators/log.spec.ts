@@ -1,6 +1,6 @@
-import { LogErrorRepository } from '../../data/protocols/log-error-repository'
+import { LogErrorRepository } from '../../data/protocols/db/log-error-repository'
 import { AccountModel } from '../../domain/models/account'
-import { serverError, ok } from '../../presentation/helpers/http-helpers'
+import { serverError, ok } from '../../presentation/helpers/http/http-helpers'
 import { Controller, HttpRequest, HttpResponse } from '../../presentation/protocols'
 import { LogControllerDecorator } from './log'
 
@@ -35,8 +35,8 @@ const makeFakeServerError = (): HttpResponse => {
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      return new Promise(resolve => resolve(ok(makeFakeAccount())))
+    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+      return new Promise((resolve) => resolve(ok(makeFakeAccount())))
     }
   }
 
@@ -45,8 +45,8 @@ const makeController = (): Controller => {
 
 const makeLogErrorRepository = (): LogErrorRepository => {
   class LogErrorRepositoryStub implements LogErrorRepository {
-    async logError (stack: string): Promise<void> {
-      return new Promise(resolve => resolve())
+    async logError(stack: string): Promise<void> {
+      return new Promise((resolve) => resolve())
     }
   }
 
