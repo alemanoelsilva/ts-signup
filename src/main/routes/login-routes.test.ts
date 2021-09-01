@@ -38,6 +38,7 @@ describe('Login Routes', () => {
         email: 'ale@email.com',
         password
       })
+
       await request(app)
         .post('/api/login')
         .send({
